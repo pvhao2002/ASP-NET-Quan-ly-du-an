@@ -1,0 +1,41 @@
+﻿@model QuanLyDuAn.Models.AssignmentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/Content/list.index.css" type="text/css">
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item active">Assignment</li>
+    </ol>
+    <hr />
+    <div class="d-flex">
+        @Html.ActionLink("Add", "Add", "Assignment", new { @class = "btnAdd" })
+    </div>
+    <table border="1">
+        <tr>
+            <th>Assignment ID</th>
+            <th>Task name</th>
+            <th>User name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model.listAssignment)
+        {
+            <tr>
+                <td>@item.assignment_id</td>
+                <td>@Model.getTaskName(item.task_id)</td>
+                <td>@Model.getUsername(item.user_id)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "Assignment", new { id = item.assignment_id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Assignment", new { id = item.assignment_id }, new { onclick = "return confirm('Are you sure you want to delete this Assignment?');" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

@@ -1,0 +1,25 @@
+﻿@model QuanLyDuAn.Models.users
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+<section id="content" class="container">
+    @using (Html.BeginForm("Edit", "User", new { user_id = Model.user_id }, FormMethod.Post, null))
+    {
+        <h1>Bảng nhập thông tin cho User</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để chỉnh sửa User.</p>
+        @Html.ValidationSummary(true);
+        <label for="name"><b>User name</b></label>
+        @Html.TextBoxFor(m => m.user_name, new { value = Model.user_name, disabled = "disabled" })
+        <label for="password"><b>Password</b></label>
+        @Html.TextBoxFor(m => m.password, new { type = "password", value = Model.password, required = "required", autofocus = "autofocus" })
+        <label for="email"><b>Email</b></label>
+        @Html.TextBoxFor(m => m.email, new { type = "email", value = Model.email, required = "required" });
+
+        <div class="clearfix">
+            <input type="submit" name="edit" value="Edit" class="btnAdd">
+        </div>
+    }
+</section>

@@ -1,0 +1,32 @@
+﻿@model QuanLyDuAn.Models.project_manager
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+<section id="content" class="container">
+    <div id="message">
+        @if (ViewBag.Message == "success")
+        {
+            <p class='success'>Sửa thành công manager..</p>
+        }
+        else if (ViewBag.Message == "error")
+        {
+            <p class='error'>Lỗi sửa thông tin manager...</p>
+        }
+    </div>
+    @using (Html.BeginForm("Edit", "ProjectManager", new { manager_id = Model.manager_id},FormMethod.Post,null))
+    {
+        <h1>Bảng nhập thông tin cho Project Manager</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để chỉnh sửa Project Manager.</p>
+        @Html.ValidationSummary(true);
+        <label for="name"><b>Manager name</b></label>
+        @Html.TextBoxFor(m => m.manager_name, new { value = Model.manager_name, required = "required", autofocus = "autofocus" })
+
+        <div class="clearfix">
+            <input type="submit" name="edit" value="Edit" class="btnAdd">
+        </div>
+    }
+</section>

@@ -1,0 +1,40 @@
+﻿@model QuanLyDuAn.Models.users
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/login.css" type="text/css">
+}
+<div class="login-page">
+    <div class="form">
+        <p class="text-danger">@ViewBag.message</p>
+        @using (Html.BeginForm("Register", "Login", FormMethod.Post, new { @class = "register-form" }))
+        {
+            @Html.ValidationSummary(true);
+            <h3 class="text-center fw-bold">Register</h3>
+            @Html.TextBoxFor(m => m.user_name, new { @placeholder = "Type your user name" })
+            @Html.TextBoxFor(m => m.password, new { @placeholder = "Type your password", @type = "password" })
+            @Html.TextBoxFor(m => m.email, new { placeholder = "Type your email", @type = "email" })
+            <input type="submit" value="Register" name="register" />
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        }
+
+        @using (Html.BeginForm("SignIn", "Login", FormMethod.Post, new { @class = "login-form" }))
+        {
+            @Html.ValidationSummary(true);
+            <h3 class="text-center fw-bold">Login</h3>
+            @Html.TextBoxFor(m => m.user_name, new { @placeholder = "Type your user name" })
+            @Html.TextBoxFor(m => m.password, new { @placeholder = "Type your password", @type = "password" })
+            <input type="submit" value="Login" name="login" />
+            <p class="message">Not registered? <a href="#">Create an account</a></p>
+        }
+
+    </div>
+</div>
+
+<script>
+    $('.message a').click(function () {
+        $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
+    });
+</script>

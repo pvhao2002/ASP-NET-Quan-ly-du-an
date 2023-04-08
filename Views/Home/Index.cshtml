@@ -1,0 +1,59 @@
+﻿@model QuanLyDuAn.Models.DBContext
+@{
+    ViewBag.Title = "Home Page";
+    string title = "Dashboard";
+}
+<div class="container-fluid px-4">
+    <h1 class="mt-4">@title</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">@title</li>
+    </ol>
+    <hr />
+</div>
+
+<div class="row mx-5">
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Project</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white">Total number: @Model.project.Count()</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Task</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white">Total number: @Model.task.Count()</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Users</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white">Total number: @Model.users.Count()</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Manager</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white">Total number: @Model.project_manager.Count()</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Assignment</div>
+            <div class="card-footer d-flex align-items-center justify-content-between">
+                <div class="small text-white">Total number: @Model.assignment.Count()</div>
+            </div>
+        </div>
+    </div>
+</div>

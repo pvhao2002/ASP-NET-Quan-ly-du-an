@@ -1,0 +1,33 @@
+﻿@model QuanLyDuAn.Models.project_manager
+@{
+    ViewBag.Title = "AddProjectManager";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+<section id="content" class="container">
+    <div id="message">
+        @if (ViewBag.Message == "success")
+        {
+            <p class='success'>Thêm mới thành công manager..</p>
+        }
+        else if (ViewBag.Message == "error")
+        {
+            <p class='error'>Lỗi thêm mới manager...</p>
+        }
+    </div>
+    @using (Html.BeginForm("Add", "ProjectManager", FormMethod.Post))
+    {
+        <h1>Bảng nhập thông tin cho Project Manager</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để thêm mới Project Manager.</p>
+        @Html.ValidationSummary(true);
+        <label for="name"><b>Manager name</b></label>
+        @Html.TextBoxFor(m => m.manager_name, new { placeholder = "Type your project manager name", required = "required", autofocus = "autofocus" })
+
+        <div class="clearfix">
+            <input type="submit" name="add" value="Add" class="btnAdd">
+        </div>
+    }
+</section>
+

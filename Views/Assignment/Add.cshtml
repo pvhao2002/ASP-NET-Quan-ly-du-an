@@ -1,0 +1,47 @@
+﻿@model QuanLyDuAn.Models.AssignmentViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+
+<section id="content" class="container">
+    <div id="message">
+        @if (ViewBag.Message == "success")
+        {
+            <p class='success'>Thêm mới thành công assignment..</p>
+        }
+        else if (ViewBag.Message == "error")
+        {
+            <p class='error'>Lỗi thêm mới assignment...</p>
+        }
+    </div>
+    @using (Html.BeginForm("Add", "Assignment", FormMethod.Post))
+    {
+        <h1>Bảng nhập thông tin cho task</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để thêm mới assignment.</p>
+        @Html.ValidationSummary(true);
+
+        <label for="task_id"><b>Task</b></label>
+        <select name="task_id">
+            @foreach (var i in Model.listTask)
+            {
+                <option value="@i.task_id">@i.task_name</option>
+            }
+        </select>
+
+        <label for="user_id"><b>User</b></label>
+        <select name="user_id">
+            @foreach (var i in Model.listUser)
+            {
+                <option value="@i.user_id">@i.user_name</option>
+            }
+        </select>
+
+        <div class="clearfix">
+            <input type="submit" name="add" value="Add" class="btnAdd">
+        </div>
+    }
+</section>
+

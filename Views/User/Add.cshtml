@@ -1,0 +1,38 @@
+﻿@model QuanLyDuAn.Models.users
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+<section id="content" class="container">
+    <div id="message">
+        @if (ViewBag.Message == "success")
+        {
+            <p class='success'>Thêm mới thành công user..</p>
+        }
+        else if (ViewBag.Message == "error")
+        {
+            <p class='error'>Lỗi. Tên tài khoản đã tồn tại.</p>
+        }
+    </div>
+    @using (Html.BeginForm("Add", "User", FormMethod.Post))
+    {
+        <h1>Bảng nhập thông tin cho User</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để thêm mới User.</p>
+        @Html.ValidationSummary(true);
+        <label for="name"><b>User name</b></label>
+        @Html.TextBoxFor(m => m.user_name, new { placeholder = "Type your username", required = "required", autofocus = "autofocus" })
+
+        <label for="password"><b>Password</b></label>
+        @Html.TextBoxFor(m => m.password, new { type = "password", placeholder = "Type your password", required = "required" })
+
+        <label for="email"><b>Email</b></label>
+        @Html.TextBoxFor(m => m.email, new { type = "email", placeholder = "Type your email", required = "required" })
+
+        <div class="clearfix">
+            <input type="submit" name="add" value="Add" class="btnAdd">
+        </div>
+    }
+</section>

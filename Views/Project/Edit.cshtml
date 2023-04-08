@@ -1,0 +1,41 @@
+﻿@model QuanLyDuAn.Models.ProjectViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+
+<section id="content" class="container">
+    <div id="message">
+        <p style="background-color: cornflowerblue; color: white;">@ViewBag.message</p>
+    </div>
+    @using (Html.BeginForm("Edit", "Project", new { project_id = Model.project.project_id }, FormMethod.Post, null))
+    {
+        <h1>Bảng nhập thông tin cho Project</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để sửa Project.</p>
+        @Html.ValidationSummary(true);
+        @Html.TextBoxFor(m => m.project.project_id, new {@style="display: none;"});
+        <label for="name"><b>Project name</b></label>
+        @Html.TextBoxFor(m => m.project.project_name, new { value = Model.project.project_name, required = "required", autofocus = "autofocus" });
+
+        <label for="startDate"><b>Start Date</b></label>
+        @Html.TextBoxFor(model => model.project.start_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="endDate"><b>End Date</b></label>
+        @Html.TextBoxFor(model => model.project.end_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="project_manager_id"><b>Manager</b></label>
+        <select name="project_manager_id">
+            @foreach (var i in Model.listProjectManager)
+            {
+                <option value="@i.manager_id">@i.manager_name</option>
+            }
+        </select>
+
+        <div class="clearfix">
+            <input type="submit" name="edit" value="Edit" class="btnAdd">
+        </div>
+    }
+</section>
+

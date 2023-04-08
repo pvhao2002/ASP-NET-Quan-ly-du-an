@@ -1,0 +1,44 @@
+﻿@model QuanLyDuAn.Models.TaskViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+
+<section id="content" class="container">
+    <div id="message">
+        <p style="background-color: cornflowerblue; color: white;">@ViewBag.message</p>
+    </div>
+    @using (Html.BeginForm("Edit", "Task", FormMethod.Post))
+    {
+        <h1>Bảng nhập thông tin cho task</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để sửa task.</p>
+        @Html.ValidationSummary(true);
+        @Html.TextBoxFor(m => m.task.task_id, new { @style = "display: none;" });
+        <label for="name"><b>Task name</b></label>
+        @Html.TextBoxFor(m => m.task.task_name, new { value = Model.task.task_name, required = "required", autofocus = "autofocus" })
+
+        <label for="startDate"><b>Start Date</b></label>
+        @Html.TextBoxFor(model => model.task.start_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="endDate"><b>End Date</b></label>
+        @Html.TextBoxFor(model => model.task.end_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="status"><b>Status</b></label>
+        @Html.TextBoxFor(m => m.task.status, new { value = Model.task.status, required = "required" })
+
+        <label for="project_id"><b>Project</b></label>
+        <select name="project_id">
+            @foreach (var i in Model.listProject)
+            {
+                <option value="@i.project_id">@i.project_name</option>
+            }
+        </select>
+
+        <div class="clearfix">
+            <input type="submit" name="edit" value="Edit" class="btnAdd">
+        </div>
+    }
+</section>
+

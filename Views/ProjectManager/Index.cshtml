@@ -1,0 +1,40 @@
+﻿@model List<QuanLyDuAn.Models.project_manager>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section css{
+    <link rel="stylesheet" href="~/Content/list.index.css" type="text/css">
+}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">Dashboard</h1>
+    <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item active">Dashboard</li>
+        <li class="breadcrumb-item active">Project Manager</li>
+    </ol>
+    <hr />
+    <div class="d-flex">
+        @Html.ActionLink("Add", "AddProjectManager", "ProjectManager", null, new { @class = "btnAdd" })
+    </div>
+    <table border="1">
+        <tr>
+            <th>Manager ID</th>
+            <th>Manager name</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.manager_id</td>
+                <td>@item.manager_name</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "ProjectManager", new { id = item.manager_id }, null) |
+                    @Html.ActionLink("Delete", "Delete", "ProjectManager",new {id=item.manager_id} , new { @onclick = "return confirm('Are you sure you want to delete this manager?');" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+

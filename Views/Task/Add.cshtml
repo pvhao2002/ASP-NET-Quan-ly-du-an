@@ -1,0 +1,50 @@
+﻿@model QuanLyDuAn.Models.TaskViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section css{
+    <link rel="stylesheet" href="~/Content/add.css">
+}
+
+<section id="content" class="container">
+    <div id="message">
+        @if (ViewBag.Message == "success")
+        {
+            <p class='success'>Thêm mới thành công task..</p>
+        }
+        else if (ViewBag.Message == "error")
+        {
+            <p class='error'>Lỗi thêm mới task...</p>
+        }
+    </div>
+    @using (Html.BeginForm("Add", "Task", FormMethod.Post))
+    {
+        <h1>Bảng nhập thông tin cho task</h1>
+        <p>Vui lòng nhập đầy đủ thông tin để thêm mới task.</p>
+        @Html.ValidationSummary(true);
+        <label for="name"><b>Task name</b></label>
+        @Html.TextBoxFor(m => m.task.task_name, new { placeholder = "Type your task name", required = "required", autofocus = "autofocus" })
+
+        <label for="startDate"><b>Start Date</b></label>
+        @Html.TextBoxFor(model => model.task.start_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="endDate"><b>End Date</b></label>
+        @Html.TextBoxFor(model => model.task.end_date, new { type = "date", required = "required", @onfocus = "this.showPicker();" })
+
+        <label for="status"><b>Status</b></label>
+        @Html.TextBoxFor(m => m.task.status, new { placeholder = "Type your status of task", required = "required" })
+
+        <label for="project_id"><b>Project</b></label>
+        <select name="project_id">
+            @foreach (var i in Model.listProject)
+            {
+                <option value="@i.project_id">@i.project_name</option>
+            }
+        </select>
+
+        <div class="clearfix">
+            <input type="submit" name="add" value="Add" class="btnAdd">
+        </div>
+    }
+</section>
+
